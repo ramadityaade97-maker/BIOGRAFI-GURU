@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: url(background.png) center/cover no-repeat fixed;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            z-index: -1;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.822);
+        }
+
+        .intro {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(circle at center, #1a1a1a, #000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: introZoomOut 2s ease 4s forwards;
+            z-index: 10;
+        }
+
+        /* TEXT ANIMATION */
+        .intro h1 {
+            font-size: 48px;
+            letter-spacing: 3px;
+            opacity: 0;
+            filter: blur(20px);
+            transform: scale(1.5);
+            animation: zoomBlurIn 2s ease forwards;
+        }
+
+        /* CONTENT */
+        .content {
+            opacity: 0;
+            padding: 60px;
+            animation: contentFadeIn 2s ease 5s forwards;
+        }
+
+        /* KEYFRAMES */
+
+        /* Text zoom in + blur hilang */
+        @keyframes zoomBlurIn {
+            0% {
+                opacity: 0;
+                filter: blur(20px);
+                transform: scale(1.5);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                transform: scale(1);
+            }
+        }
+
+        /* Intro zoom out + fade */
+        @keyframes introZoomOut {
+            to {
+                opacity: 0;
+                transform: scale(1.2);
+                visibility: hidden;
+            }
+        }
+
+        /* Content muncul */
+        @keyframes contentFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-hero, .section-about, .section-about-2, .section-about-3, .section-about-4, .section-5 {
+            min-height: 100vh;
+        }
+
+        section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        nav {
+            position: fixed;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid #FFC300;
+            box-shadow:  0 0 10px #FFD60A,
+                         0 0 10px #FFD60A;;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: 0.3s ease;
+        }
+
+        nav.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        nav h2 {
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            padding-left: 20px;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            list-style-type: none;
+        }
+
+        nav li a {
+            text-decoration: none;
+            padding: 10px 15px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero {
+            padding-top: 70px;
+            display: flex;
+            justify-content: space-between;
+            color: white;
+            margin-bottom: 300px;
+        }
+
+        .hero-text {
+            padding-top: 200px;
+            padding-right: 90px;
+        }
+
+       .hero-text h2 {
+            font-size: 44px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+            color: #f5f5f5;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-text h2::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(
+                to right,
+                transparent,
+                #FFD60A,
+                transparent
+            );
+            opacity: 0.7;
+        }
+
+        .gelar {
+            font-size: 22px;
+            color: rgba(255,255,255,0.6);
+            font-weight: 400;
+        }
+
+        .hero-text p {
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 20px;
+            font-style: italic;
+            margin-bottom: 100px;
+        }
+
+       .btn {
+            transition: 0.3s;
+            box-shadow: 0 0 10px #FFD60A;
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            text-decoration: none;
+            color: aliceblue;
+        }
+
+        .btn:hover {
+            background: black;
+            color: #FFD60A;
+            border: 1px solid #FFD60A;
+            box-shadow: 0 0 20px #FFD60A,
+                        0 0 40px #FFC300;
+        }
+        .hero img {
+            width: 350px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px #FFD60A;
+            margin-left: 150px;
+            margin-top: 80px;
+        }
+
+        .hero img:hover,
+        .about img:hover {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+            transition: 0.4s ease;
+            box-shadow: 0 0 20px #FFD60A,
+                        0 0 40px #FFC300;
+        }
+
+        .tokoh {
+            color: #FFC300;
+        }
+
+        .about {
+            color: white;
+            display: flex;
+            gap: 40px;
+            justify-content: space-evenly;
+        }
+
+        .about img {
+            width: 300px;
+            border-radius: 10px;
+            filter: grayscale(100%);
+            margin-right: 50px;
+        }
+
+        .card {
+            margin-left: 100px;
+        }
+
+        .card, .card-2, .card-3, .card-4 {
+            background: rgba(255,255,255,0.05);
+            margin-top: 100px;
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 10px rgba(255, 214, 10, 0.3);
+            
+        }
+
+        .h2-card {
+            padding-left: 40px;
+            padding-bottom: 5px;
+        }
+
+        .about-text {
+            padding-top: 220px;
+            margin-right: 200px;
+        }
+
+        .about-text p {
+            font-size: 20px;
+            font-family: 'Poppins', sans-serif;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.8;
+            max-width: 100%;
+        }
+
+        .about-text-2 {
+            padding-top: 200px;
+            margin-left: 100px;
+        }
+
+        .about-text-2 p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            line-height: 1.8;
+            max-width: 100%;
+        }
+        
+        .card-2 {
+            margin-right: 100px;
+        }
+
+        .about-text-3 {
+            padding-top: 250px;
+        }
+
+        .about-text-3 p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            line-height: 1.8;
+            max-width: 100%;
+        }
+
+        .card-3 {
+            
+            margin-left: 100px;
+        }
+
+        .about-text-4 {
+            
+            padding-left: 100px;
+        }
+
+        .about-text-4 p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            margin-top: 250px;
+            line-height: 1.8;
+            max-width: 100%;
+        }
+
+        .card-4 {
+            margin-right: 70px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding-top: 100px;
+            flex-wrap: wrap;
+        }
+
+        .card-box {
+            background: transparent;
+            backdrop-filter: blur(20px);
+            width: 400px;
+            height: 500px;
+            padding: 25px 20px;
+            transition: 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+        }
+
+        .card-box:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow:  0 20px 40px rgba(255, 204, 0, 0.25);
+        }
+        .card-box img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 50px;
+            margin-top: 30px;
+            border: 3px solid rgba(255, 174, 0, 0.6);
+        }
+
+        .card-box p {
+            color: #ccc;
+            line-height: 1.5;
+            opacity: 0.85;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .card-box h2 {
+            color: #ffcc00;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 8px rgba(255, 204, 0, 0.5);
+            text-align: center;
+            padding-top: 30px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .socials {
+            margin-top: 30px;
+            margin-left: 665px;
+            margin-bottom: 100px;
+        }
+
+        .socials a {
+            display: inline-block;
+            margin: 0 6px;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            border-radius: 50%;
+            background: #1a1a1a;
+            color: #aaa;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .socials a:hover {
+            color: #000;
+            background: #facc15;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+
+            /* NAV */
+            nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            nav h2 {
+                padding-left: 0;
+                font-size: 18px;
+            }
+
+            /* HERO */
+            .hero {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                margin-bottom: 100px;
+                padding-top: 100px;
+            }
+
+            .hero-text {
+                padding: 120px 20px 20px 20px;
+                padding-top: -100px;
+            }
+
+            .hero-text h2 {
+                font-size: 28px;
+            }
+
+            .hero-text p {
+                font-size: 14px;
+                letter-spacing: 1px;
+            }
+
+            .hero img {
+                width: 220px;
+                margin: 20px 0;
+            }
+
+            /* ABOUT SECTION */
+            .about {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .about img {
+                width: 100%;
+                max-width: 250px;
+                margin: 10px 0;
+            }
+
+            .card, .card-2, .card-3, .card-4 {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .about-text,
+            .about-text-2,
+            .about-text-3,
+            .about-text-4 {
+                padding: 20px;
+                margin: 0;
+            }
+
+            .about-text p,
+            .about-text-2 p,
+            .about-text-3 p,
+            .about-text-4 p {
+                font-size: 15px;
+                text-align: justify;
+            }
+
+            /* TEAM SECTION */
+            .card-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding-top: 50px;
+            }
+
+            .card-box {
+                width: 90%;
+                height: auto;
+                padding: 20px;
+            }
+
+            .card-box img {
+                width: 120px;
+                height: 120px;
+                margin: 0 auto;
+                display: block;
+            }
+
+            .card-box h2 {
+                font-size: 16px;
+            }
+
+            .card-box p {
+                font-size: 13px;
+            }
+
+            /* SOCIAL */
+            .socials {
+                margin: 40px 0;
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+                padding: 15px;
+            }
+
+            .intro {
+                text-align: center;
+            }
+
+            nav h2 {
+                font-size: 16px;
+            }
+
+            nav li a {
+                font-size: 13px;
+                padding: 8px;
+            }
+
+            /* HERO */
+            .hero-text {
+                padding: 100px 15px 10px 15px;
+            }
+
+            .hero-text h2 {
+                font-size: 22px;
+                line-height: 1.3;
+            }
+
+            .gelar {
+                font-size: 16px;
+            }
+
+            .hero-text p {
+                font-size: 13px;
+                letter-spacing: 0.5px;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 13px;
+            }
+
+            .hero img {
+                width: 180px;
+                margin-bottom: -80px;
+            }
+
+            .about-text p,
+            .about-text-2 p,
+            .about-text-3 p,
+            .about-text-4 p {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            .card, .card-2, .card-3, .card-4 {
+                padding: 15px;
+                margin: 15px;
+            }
+
+            .card-box {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .card-box img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .card-box h2 {
+                font-size: 15px;
+            }
+
+            .card-box p {
+                font-size: 12px;
+            }
+
+            .socials a {
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                font-size: 12px;
+            }
+
+            .card, .card-2, .card-3, .card-4 {
+                padding-left: 50px;
+            }
+        }
+
+    </style>
+<body>
+    <nav>
+        <h2>BIOGRAFI</h2>
+        <ul>
+            <li>
+                <a href="#HOME">HOME</a>
+                <a href="#ABOUT">ABOUT</a>
+                <a href="">CONTACT</a>
+            </li>
+        </ul>
+    </nav>
+
+<div class="intro">
+        <h1 style="color: white;">Kelompok 8</h1>
+    </div>
+</div>
+
+    <section class="section-hero" id="HOME">
+        <div class="hero">
+            <img src="poto muka.jpeg" alt="tokoh">
+            <div class="hero-text">
+                <h2 class="typing-text">Nyoman Hendra Adi Wijaya <br>
+                    <span class="gelar">S.Pd., M.Kom.</span>
+                </h2>
+                <p>Inspiring minds through knowledge, shaping character with values, <br>
+                     and guiding the next generation toward a brighter and meaningful future.</p>
+                <a href="#ABOUT" class="btn">BACA BIOGRAFI</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-about" id="ABOUT">
+        <div class="about">
+            <div class="card">
+                <h2 class="h2-card">TENTANG TOKOH</h2>
+                <img src="jembatan.jpeg" alt="about">
+                <img src="lulus.jpeg" alt="guru">
+            </div>
+            <div class="about-text">
+                <p>Menyelesaikan pendidikan SMK pada tahun 2002, beliau langsung memasuki dunia kerja, sesuai dengan tujuan utama lulusan SMK pada masa itu. 
+                    Selama kurang lebih tiga tahun, beliau bekerja di bidang konstruksi sebagai pelaksana proyek jalan dan jembatan. <br> 
+                    <span class="paragrafone">Awalnya, beliau tidak memiliki rencana untuk menjadi seorang guru. Ketertarikannya pada dunia pendidikan terjadi secara tidak terduga, berawal dari hobinya sebagai pemain sepak bola. Ia sering berlatih bersama mahasiswa di sebuah kampus di Singaraja. Karena tim kampus membutuhkan pemain untuk kompetisi, 
+                    beliau diajak bergabung. Namun, karena bukan mahasiswa, beliau tidak dapat ikut serta secara resmi. Dari situlah muncul dorongan untuk melanjutkan pendidikan ke perguruan tinggi.</span></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-about-2">
+        <div class="about" style="padding-top: 100px;">
+            <div class="about-text-2">
+                <p>Pada tahun 2005, beliau memutuskan untuk kuliah. Masa awal perkuliahan menjadi tantangan tersendiri, karena harus beradaptasi kembali dengan dunia pendidikan setelah tiga tahun bekerja. Terlebih, ia harus berhadapan dengan mahasiswa lain yang sebagian besar baru lulus SMA dan seusia dengannya. Selama sekitar satu setengah tahun pertama, beliau sering merasa gugup dan kesulitan mengikuti perkuliahan. <br>
+
+Namun, dengan prinsip bahwa setiap tantangan harus dihadapi, bukan dihindari, beliau terus berusaha menyesuaikan diri. Memasuki semester tiga, ia mulai memahami ritme perkuliahan dan mampu beradaptasi dengan baik. Berkat keaktifannya dalam organisasi, beliau dipercaya menjabat sebagai Wakil Ketua BEM serta memegang berbagai posisi dalam kegiatan kemahasiswaan.</p>
+            </div>
+            <div class="card-2">
+                <img src="teman.jpeg" alt="">
+                <img src="bem.jpeg" alt="">
+            </div>
+        </div>
+    </section>
+
+    <section class="section-about-3">
+        <div class="about">
+            <div class="card-3">
+                <img src="guru.jpeg" alt="">
+                <img src="jauk.jpeg" alt="">
+            </div>
+
+            <div class="about-text-3">
+                <p>Pada tahun 2009, beliau berhasil menyelesaikan pendidikan dan lulus <br>
+                     dari perguruan tinggi. Pada tahun yang sama, beliau mulai berkarier sebagai guru <br>
+                     di SMKTI Bali Global Singaraja <span style="color: #FFD60A;">hingga tahun 2011.</span> <br>
+                     Selanjutnya, sejak Juli 2011, beliau melanjutkan pengabdian sebagai pendidik di <br>
+                      SMKTI Bali Global Denpasar hingga saat ini.
+
+Selain sebagai <span style="color: #FFD60A">guru Agama Hindu</span>, beliau juga dipercaya sebagai <span style="color: #FFD60A">pembina OSIS</span> yang aktif dalam berbagai kegiatan sekolah, khususnya dalam pelaksanaan MPLS setiap awal tahun ajaran.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-about-4">
+        <div class="about">
+            <div class="about-text-4">
+                <p>Selama berkarier di dunia pendidikan, beliau merasakan banyak pengalaman suka dan duka. <br>
+                    Kebahagiaan terbesar adalah dapat berinteraksi dengan siswa, rekan kerja, serta melihat 
+                    para peserta didik tumbuh dan sukses di masyarakat. Hal tersebut menjadi kebanggaan tersendiri
+                    sebagai seorang pendidik. <br>
+
+
+Di balik itu, terdapat pengorbanan pribadi, seperti keterbatasan
+waktu bersama keluarga, <br>
+
+</b> terutama saat menjalankan tugas di awal tahun ajaran. Meskipun demikian, <br>
+ profesi ini tetap dijalani dengan penuh keikhlasan. <br>
+
+Bagi beliau, menjadi guru bukanlah tentang materi, melainkan <span style="color: #FFD60A;">panggilan hati.</span> Kunci utama dalam menjalani profesi ini adalah memiliki kecintaan terhadap dunia pendidikan serta semangat untuk membimbing generasi muda.</p>
+            </div>
+        <div class="card-4">
+            <img src="foto keluarga.jpeg" alt="">
+            <img src="selfie.jpeg" alt="">
+        </div>
+        </div>
+    </section>
+
+    <section class="section-5">
+        <div class="card-container">
+            <div class="card-box">
+                <img src="indah.jpeg" alt="indah">
+                <h2>Kadek Indah Cahyati</h2>
+                <p>Pengumpulan Informasi Dan Pewawancara</p>
+            </div>
+
+            <div class="card-box">
+                <img src="nasya.jpeg" alt="indah">
+                <h2>Ni Putu Nasya Eka Putri</h2>
+                <p>Pengumpulan Informasi Dan Pewawancara</p>
+            </div>
+
+            <div class="card-box">
+                <img src="indah.jpeg" alt="indah">
+                <h2>Gede Aditya Permana Putra Gangga</h2>
+                <p>Pewawancara</p>
+            </div>
+
+            <div class="card-box">
+                <img src="foto gua 2.jpeg" alt="indah">
+                <h2>I Putu Gede Septyadi <br>
+                     Ramaditya Nugraha</h2>
+                <p>Pembuat Web</p>
+            </div>
+        </div>
+    </section>
+
+        <div class="socials">
+            <a href="https://instagram.com/username" target="_blank">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://tiktok.com/@username" target="_blank">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://wa.me/6287701042322" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+    <script>
+const sections = document.querySelectorAll("section");
+
+window.addEventListener("scroll", () => {
+    const triggerBottom = window.innerHeight * 0.85;
+
+    sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+
+        if(sectionTop < triggerBottom){
+            section.classList.add("show");
+        } else {
+            section.classList.remove("show"); 
+        }
+    });
+});
+
+const navbar = document.querySelector("nav");
+
+setTimeout(() => {
+    navbar.classList.add("show");
+}, 6000);
+</script>
+</body>
+</html>
